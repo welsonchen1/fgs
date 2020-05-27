@@ -1,0 +1,133 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+
+<h:form>
+	<ui:decorate template="/_toolbar.xhtml">
+		<ui:param name="title" value="test" />
+		<ui:define name="button">
+			<p:commandButton value="Ajax Submit"  update="growl"
+				action="#{buttonView.buttonAction}" style="margin-right:20px;"
+				styleClass="ui-priority-primary" icon="fa fa-fw fa-search" 
+				oncomplete="PF('waitBlockUIWidget').unblock()"
+				onstart="PF('waitBlockUIWidget').block()" />
+			<p:spacer height="1px" width="10px" />
+			<p:commandButton icon="ui-icon-folder-collapsed" ignoreAutoUpdate="true"
+				partialSubmit="true" process="@this" value="Reset" />
+			<p:commandButton icon="ui-icon-folder-collapsed" onclick="PF('menuOverlayPanelWidget').show();"
+			process="@this" value="Show" />	
+		</ui:define>
+	</ui:decorate>
+	<p:overlayPanel dismissable="false" id="menuOverlayPanel" modal="true" showCloseIcon="true"
+               widgetVar="menuOverlayPanelWidget">
+               <h:form>
+	<p:tree value="#{menu.root}" var="doc"
+                        selectionMode="single"
+                        selection="#{menu.selectedNode}">
+        <p:treeNode expandedIcon="pi pi-folder-open" collapsedIcon="pi pi-folder">
+            <h:outputText value="#{doc.name}"/>
+        </p:treeNode>
+        <p:treeNode type="document" icon="pi pi-file">
+            <h:outputText value="#{doc.name}" />
+        </p:treeNode>
+        <p:treeNode type="picture" icon="pi pi-image">
+            <h:outputText value="#{doc.name}" />
+        </p:treeNode>
+        <p:treeNode type="mp3" icon="pi pi-video">
+            <h:outputText value="#{doc.name}" />
+        </p:treeNode>
+    </p:tree>
+    </h:form>
+    </p:overlayPanel>
+	<p:growl id="growl" life="2000" />
+
+	<p:commandButton value="Ajax Submit" id="ajax" update="growl"
+		action="#{buttonView.buttonAction}" style="margin-right:20px;"
+		styleClass="ui-priority-primary"
+		oncomplete="PF('waitBlockUIWidget').unblock()"
+		onstart="PF('waitBlockUIWidget').block()" />
+
+	<p:commandButton value="Non-Ajax Submit" id="nonAjax"
+		action="#{buttonView.buttonAction}" style="margin-right:20px;"
+		ajax="false" />
+
+	<p:commandButton value="With Icon" id="withIcon"
+		action="#{buttonView.buttonAction}" update="growl"
+		style="margin-right:20px;" icon="pi pi-save" />
+
+	<p:commandButton action="#{buttonView.buttonAction}" id="iconOnly"
+		update="growl" style="margin-right:20px;" icon="pi pi-save"
+		title="Icon Only" />
+
+	<p:commandButton value="Disabled" id="disabled"
+		style="margin-right:20px;" disabled="true" />
+	<p:growl id="messages" showDetail="false" />
+	<h3>Programmatic Menu</h3>
+	<p:menu model="#{buttonView.model}" />
+
+
+	<h:panelGrid columns="3" cellpadding="8">
+		<h:outputText value="Focus/Blur: " />
+		<p:inputText id="focus"
+			title="This tooltip is displayed when input gets the focus" />
+		<p:tooltip id="toolTipFocus" for="focus" showEvent="focus"
+			hideEvent="blur" />
+
+		<h:outputText value="Position: " />
+		<h:outputLink id="fade" value="#">
+			<h:outputText value="Top" />
+		</h:outputLink>
+		<p:tooltip id="toolTipFade" for="fade"
+			value="There are 4 options for position" position="top" />
+
+		<h:outputText value="Track Mouse: " />
+		<h:outputLink id="track" value="#">
+			<h:outputText value="Mouse Tracking" />
+		</h:outputLink>
+		<p:tooltip id="toolTipTrack" for="track"
+			value="This tooltip tracks mouse position" trackMouse="true" />
+
+		<h:outputText value="Clip/Explode: " />
+		<h:outputLink id="grow" value="#">
+			<h:outputText value="Clip/Explode Effects" />
+		</h:outputLink>
+		<p:tooltip id="toolTipGrow" for="grow"
+			value="This tooltip uses clip/explode effects for the animation"
+			showEffect="clip" hideEffect="explode" position="left" />
+
+		<h:outputText value="Content: " />
+		<h:outputLink id="content" value="#">
+			<h:outputText value="PrimeFaces" />
+		</h:outputLink>
+		<p:tooltip id="toolTipContent" for="content" position="bottom">
+			<p:graphicImage name="/demo/images/logo-trans.png" />
+		</p:tooltip>
+	</h:panelGrid>
+	<p:dataTable value="#{viewEmployeesManagedBean.employees}"
+		var="employee"
+		currentPageReportTemplate="{startRecord} - {endRecord} of {totalRecords}"
+		paginator="true"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rows="5" rowsPerPageTemplate="5,10,15,20" scrollHeight="350"
+		scrollWidth="100%">
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Employee ID"></h:outputText>
+			</f:facet>
+			<h:outputText value="#{employee.employeeId}"></h:outputText>
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Employee Name"></h:outputText>
+			</f:facet>
+			<h:outputText value="#{employee.employeeName}"></h:outputText>
+		</p:column>
+	</p:dataTable>
+</h:form>
+<ui:include src="/_wait-block-ui.xhtml" />
+
+</html>

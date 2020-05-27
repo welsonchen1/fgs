@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:f="http://xmlns.jcp.org/jsf/core"
+   xmlns:h="http://xmlns.jcp.org/jsf/html"
+   xmlns:p="http://primefaces.org/ui">
+   <p:outputPanel id="toolbarOutputPanel">
+      <p:toolbar style="background-image: url('#{'/images/toolbar.png'}') !important">
+         <p:toolbarGroup>
+            <ui:insert name="button"/>
+         </p:toolbarGroup>
+         <p:toolbarGroup>
+            <span class="ui-separator">
+               <span class="ui-icon ui-icon-grip-dotted-vertical"/>
+            </span>
+         </p:toolbarGroup>
+         <p:toolbarGroup>
+            <h:outputText value="#{title}" rendered="#{not empty title}"
+               style="font-size: 14px; font-weight: bold;"/>
+         </p:toolbarGroup>
+         <p:toolbarGroup align="right">
+            <ui:insert/>
+         </p:toolbarGroup>
+      </p:toolbar>
+      <p:sticky target="toolbarOutputPanel" rendered="#{empty stickyRendered or stickyRendered}"/>
+   </p:outputPanel>
+</ui:composition>
