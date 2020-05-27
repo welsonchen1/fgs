@@ -1,0 +1,40 @@
+
+****** S E R V I C E   R E Q U E S T    D E T A I L S ********
+Response Code          - 0
+Error Message          - null
+
+Parameters:
+<Coursname,成人古箏班B>
+<Week2,false>
+<sdate,2019-03-04>
+<addTeacher_list2,11F>
+<Week1,true>
+<addTeacher_list1,黃熒熒>
+<course_data,2019-03-04>
+<course_stime,14:00>
+<addCoursename,成人古箏班B>
+<addclassID,教室三>
+<enableMulDate,off>
+<edate,2019-07-15>
+<JASON_RESULT,{success:false,title:'教室使用上有衝突',msg:'教室使用上,已經有別人使用,請選其它時間或教室,重覆活動課程名稱：成人古箏班B,Period_code:10801107'}>
+<course_Sdate,2019-03-04>
+<course_etime,16:00>
+<floorID,11>
+<register_cnt,0>
+<Teacher1,黃熒熒>
+<course_Edate,2019-07-15>
+<ErrorCode,S>
+<_inAction,CourseListEditCmd>
+<ActionType,InsertData>
+<period_code,10801107>
+<Week7,false>
+<Week6,false>
+<Week5,false>
+<Week4,false>
+<Week3,false>
+Results:
+<PMPS_USER_PRTY_ID,!!Null!!>
+<_cmdSubCommandName,com.fgs.httpCmd.CourseListEditCmd>
+<PMPS_USER_ID,!!Null!!>
+
+----------------------
